@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;   
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour, IInteractable
 {
@@ -23,7 +23,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         return !isDialogueActive;
     }
-    
+
     public void Interact()
     {
         if (dialogueData == null || (PauseController.isGamePaused && !isDialogueActive))
@@ -43,8 +43,8 @@ public class NPC : MonoBehaviour, IInteractable
         isDialogueActive = true;
         //dialogueIndex = 0;
 
-        //nameText.text = dialogueData.npcName;
-        //portraitImage.sprite = dialogueData.npcPortrait;
+        nameText.text = dialogueData.npcName;
+        portraitImage.sprite = dialogueData.npcPortrait;
 
         dialoguePanel.SetActive(true);
         PauseController.SetPause(true);
@@ -66,16 +66,16 @@ public class NPC : MonoBehaviour, IInteractable
             return;
         }
 
-        if(lineasDichas == pauseAt)
+        if (lineasDichas == pauseAt)
         {
             StartCoroutine(MiniGame());
             return;
         }
 
-    
 
-        if(++dialogueIndex < dialogueData.dialogueLines.Length)
-        { 
+
+        if (++dialogueIndex < dialogueData.dialogueLines.Length)
+        {
             StartCoroutine(Typeline());
         }
 
@@ -91,24 +91,7 @@ public class NPC : MonoBehaviour, IInteractable
         isTyping = true;
         dialogueText.SetText("");
 
-        DialogueLine line = dialogueData.dialogueLines[dialogueIndex];
-
-        if (line.speaker == Speaker.NPC)
-
-        {
-            nameText.text = dialogueData.npcName;
-            portraitImage.sprite = dialogueData.npcPortrait;
-        }
-
-        else
-        {
-            nameText.text = dialogueData.playerName;
-            portraitImage.sprite = dialogueData.playerPortrait;
-        }
-
-        //foreach (char letter in dialogueData.dialogueLines[dialogueIndex])
-        foreach (char letter in line.text)
-
+        foreach (char letter in dialogueData.dialogueLines[dialogueIndex].text)
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(dialogueData.typingSpeed);
@@ -116,8 +99,8 @@ public class NPC : MonoBehaviour, IInteractable
 
         isTyping = false;
 
-        if(dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
-        { 
+        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
+        {
             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine();
         }
