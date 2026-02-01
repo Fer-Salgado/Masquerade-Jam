@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Npc1
   m_EditorClassIdentifier: 
   npcName: "Se\xF1ora Wellington"
-  npcPortrait: {fileID: 7832007492195366764, guid: aa6d1d963c9f13248b1f044824cb8310, type: 3}
+  npcPortrait: {fileID: -227048364753191679, guid: f9990f4602484d54fa86c280193788e7, type: 3}
   dialogueLines:
   - Hola buenas noches
   - completa el primer juego
