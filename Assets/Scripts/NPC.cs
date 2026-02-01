@@ -43,8 +43,8 @@ public class NPC : MonoBehaviour, IInteractable
         isDialogueActive = true;
         //dialogueIndex = 0;
 
-        nameText.text = dialogueData.npcName;
-        portraitImage.sprite = dialogueData.npcPortrait;
+        //nameText.text = dialogueData.npcName;
+        //portraitImage.sprite = dialogueData.npcPortrait;
 
         dialoguePanel.SetActive(true);
         PauseController.SetPause(true);
@@ -60,7 +60,8 @@ public class NPC : MonoBehaviour, IInteractable
         if (isTyping)
         {
             StopAllCoroutines();
-            dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
+            //dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
+            dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex].text);
             isTyping = false;
             return;
         }
@@ -88,9 +89,26 @@ public class NPC : MonoBehaviour, IInteractable
     IEnumerator Typeline()
     {
         isTyping = true;
-        dialogueText.SetText("");   
+        dialogueText.SetText("");
 
-        foreach(char letter in dialogueData.dialogueLines[dialogueIndex])
+        DialogueLine line = dialogueData.dialogueLines[dialogueIndex];
+
+        if (line.speaker == Speaker.NPC)
+
+        {
+            nameText.text = dialogueData.npcName;
+            portraitImage.sprite = dialogueData.npcPortrait;
+        }
+
+        else
+        {
+            nameText.text = dialogueData.playerName;
+            portraitImage.sprite = dialogueData.playerPortrait;
+        }
+
+        //foreach (char letter in dialogueData.dialogueLines[dialogueIndex])
+        foreach (char letter in line.text)
+
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(dialogueData.typingSpeed);

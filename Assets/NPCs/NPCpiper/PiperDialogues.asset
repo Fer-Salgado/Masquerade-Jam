@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
+  m_Name: PiperDialogues
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - text: "Ahhh, un exquisito banquete, digno \xFAnicamente de los mejores. \xBFNo
+      lo crees?"
+    speaker: 0
+  - text: "\u2026"
+    speaker: 1
+  - text: "Claro. Estos son los platillos m\xE1s sofisticados que he probado en un
+      largo tiempo\r\n"
+    speaker: 1
+  - text: "Eso es de esperarse, por supuesto. Despu\xE9s de todo, el pr\xEDncipe
+      selecciona personalmente todos sus men\xFAs"
+    speaker: 0
+  - text: "\xBFSab\xEDa usted que los chefs que trabajan aqu\xED tambi\xE9n los ha
+      seleccionado personalmente? Talentos internacionales de las mejores cocinas
+      del mundo\u2026"
+    speaker: 0
+  - text: "Italia, Francia, Grecia, Tailandia\u2026 Claro, yo no he podido probar
+      en su lugar de origen todas estas cocinas."
+    speaker: 0
+  - text: Por eso soy afortunado de ser amigo de un caballero con gustos tan refinados
+    speaker: 0
+  - text: "Eso suena maravilloso, Se\xF1or..."
+    speaker: 1
+  - text: Piper. Shepherd Piper
+    speaker: 0
+  - text: "Se\xF1or Piper, es evidente que usted conoce muy bien de lo que habla.
+      No dudo por un instante que usted tambi\xE9n tiene un gusto impecable\r\n"
+    speaker: 1
+  - text: No cualquiera sabe apreciar de tal manera los placeres de la vida
+    speaker: 1
+  - text: "Ja ja ja, muchacho, aprecio mucho sus palabras. Es magn\xEDfico encontrar
+      personas de cultura con quien compartir estos placeres \xBFC\xFAal es su nombre?\r\n"
+    speaker: 0
+  - text: "Ll\xE1meme Se\xF1or Raven"
+    speaker: 1
+  playerName: 'Mr. Raven '
+  playerPortrait: {fileID: -1080554493355756316, guid: bee9b9298b436784d8a42f43b431dd5b, type: 3}
+  npcName: Shepherd Piper
+  npcPortrait: {fileID: 56156260904319957, guid: 05d9ac239a9383741b57ccc48605ad4d, type: 3}
+  autoProgressLines: 01010101010101010101010101
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1

@@ -12,15 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
   m_Name: Npc1
   m_EditorClassIdentifier: 
+  dialogueLines:
+  - text: Buenas noches
+    speaker: 1
+  - text: 'Buenas noches, caballero. '
+    speaker: 0
+  - text: "Soy el se\xF1or Raven, un gusto"
+    speaker: 1
+  - text: "Un gusto, yo soy la se\xF1ora Wellington"
+    speaker: 0
+  - text: "Se\xF1or Raven, no pude evitar notar su excelente gusto en relojes\u2026"
+    speaker: 0
+  - text: ...
+    speaker: 0
+  - text: "Ah, lo noto. Es claro que usted es una mujer muy sofisticada que conoce
+      sobre lo m\xE1s fino. Es un Breguet\r\n"
+    speaker: 1
+  - text: "Wow\u2026 es tan elegante, los detalles son exquisitos. No hab\xEDa visto
+      un Breguet como este antes\r\n"
+    speaker: 0
+  - text: Es que, desde luego, es hecho por encargo.
+    speaker: 1
+  - text: "\xA1Impresionante! Usted tiene muy buen gusto. Me alegra conocer a alguien
+      que tenga tal afinidad a lo refinado"
+    speaker: 0
+  playerName: Mr. Raven
+  playerPortrait: {fileID: -1080554493355756316, guid: bee9b9298b436784d8a42f43b431dd5b, type: 3}
   npcName: "Se\xF1ora Wellington"
   npcPortrait: {fileID: -227048364753191679, guid: f9990f4602484d54fa86c280193788e7, type: 3}
-  dialogueLines:
-  - Hola buenas noches
-  - completa el primer juego
-  - apoco si ya
-  - bueno ta bien
-  - hola otra vez
-  autoProgressLines: 0101010101
+  autoProgressLines: 0101010101010101010101
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
