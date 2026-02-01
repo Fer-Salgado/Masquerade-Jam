@@ -16,6 +16,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     public int lineasDichas = 0;
     public int pauseAt;
+    public bool isInMinigame = false;
 
 
     public bool CanInteract()
@@ -53,22 +54,30 @@ public class NPC : MonoBehaviour, IInteractable
 
     void NextLine()
     {
+
+        if (isInMinigame) return;
+
         if (isTyping)
         {
             StopAllCoroutines();
             dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
             isTyping = false;
+            return;
         }
-        else if(++dialogueIndex < dialogueData.dialogueLines.Length)
+
+        if(lineasDichas == pauseAt)
+        {
+            StartCoroutine(MiniGame());
+            return;
+        }
+
+    
+
+        if(++dialogueIndex < dialogueData.dialogueLines.Length)
         { 
             StartCoroutine(Typeline());
         }
-       //else if(lineasDichas == pauseAt)
-        //{
-            //EndDialogue();
-            //StopAllCoroutines();
-            //MiniGame();
-        //}
+
         else
         {
             EndDialogue();
@@ -109,21 +118,21 @@ public class NPC : MonoBehaviour, IInteractable
 
     IEnumerator MiniGame()
     {
-        if (lineasDichas == pauseAt)
-        {
-            //EndDialogue();
-            StopAllCoroutines();
-            yield return new WaitForSeconds(5f);
-            print("imagina que hay un mini juego, q haces");
-            print("ya acabo gracias");
-            dialogueIndex = ++pauseAt;
-            StartDialogue();
+        if (isInMinigame) yield break;
+        isInMinigame = true;
+        isDialogueActive = true;
+        dialoguePanel.SetActive(false);
+        PauseController.SetPause(false);
+        Debug.Log("Inicia el minijuego");
+        yield return new WaitForSeconds(5f);
+        Debug.Log("Termina el minijuego");
 
-        }
-    }
+        isInMinigame = false;
+        PauseController.SetPause(true);
+        dialoguePanel.SetActive(true);
 
-    void Update()
-    {
-        MiniGame();
+        StartCoroutine(Typeline());
+
+
     }
 }
