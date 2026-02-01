@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
   m_Name: Npc1
   m_EditorClassIdentifier: 
-  npcName: Npc1
+  npcName: "Se\xF1ora Wellington"
   npcPortrait: {fileID: 7832007492195366764, guid: aa6d1d963c9f13248b1f044824cb8310, type: 3}
   dialogueLines:
   - Hola buenas noches
-  - bye
-  autoProgressLines: 0100
+  - completa el primer juego
+  - apoco si ya
+  - bueno ta bien
+  - hola otra vez
+  autoProgressLines: 0101010101
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}

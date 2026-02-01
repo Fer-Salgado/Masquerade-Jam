@@ -11,8 +11,12 @@ public class NPC : MonoBehaviour, IInteractable
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
-    private int dialogueIndex;
-    private bool isTyping, isDialogueActive;   
+    private int dialogueIndex = 0;
+    private bool isTyping, isDialogueActive;
+
+    public int lineasDichas = 0;
+    public int pauseAt;
+
 
     public bool CanInteract()
     {
@@ -36,7 +40,7 @@ public class NPC : MonoBehaviour, IInteractable
     void StartDialogue()
     {
         isDialogueActive = true;
-        dialogueIndex = 0;
+        //dialogueIndex = 0;
 
         nameText.text = dialogueData.npcName;
         portraitImage.sprite = dialogueData.npcPortrait;
@@ -59,6 +63,12 @@ public class NPC : MonoBehaviour, IInteractable
         { 
             StartCoroutine(Typeline());
         }
+       //else if(lineasDichas == pauseAt)
+        //{
+            //EndDialogue();
+            //StopAllCoroutines();
+            //MiniGame();
+        //}
         else
         {
             EndDialogue();
@@ -84,6 +94,7 @@ public class NPC : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine();
         }
+        ++lineasDichas;
     }
 
     public void EndDialogue()
@@ -96,4 +107,23 @@ public class NPC : MonoBehaviour, IInteractable
 
     }
 
+    IEnumerator MiniGame()
+    {
+        if (lineasDichas == pauseAt)
+        {
+            //EndDialogue();
+            StopAllCoroutines();
+            yield return new WaitForSeconds(5f);
+            print("imagina que hay un mini juego, q haces");
+            print("ya acabo gracias");
+            dialogueIndex = ++pauseAt;
+            StartDialogue();
+
+        }
+    }
+
+    void Update()
+    {
+        MiniGame();
+    }
 }
