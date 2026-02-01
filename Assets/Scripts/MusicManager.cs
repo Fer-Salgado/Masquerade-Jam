@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    private static MusicManager instance;
+    public static MusicManager instance;
     private AudioSource audioSource;
     public AudioClip backgroundMusic;
 
