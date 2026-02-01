@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
+  m_Name: ASTDialogue
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - text: "\xA1Adonis!"
+    speaker: 1
+  - text: "Ah, usted de nuevo, se\xF1or Raven, \xBFQu\xE9 lo trae de regreso por
+      aqu\xED?\r\n"
+    speaker: 0
+  - text: "Espero que no sea muy repentino\u2026 pero he dejado de pensar en usted
+      nuestra \xFAltima conversaci\xF3n"
+    speaker: 1
+  - text: "Y en cuanto vi esta botella de vino en el banquete, supe que deb\xEDa
+      compartir una copa con usted"
+    speaker: 1
+  - text: "\xBFMe conceder\xEDa el honor?"
+    speaker: 1
+  - text: " Por supuesto. Le mentir\xEDa si le dijera que no estaba esperando con
+      ansias que habl\xE1ramos nuevamente"
+    speaker: 0
+  - text: "Una copa de vino, la suave iluminaci\xF3n del cuarto y una compa\xF1\xEDa
+      tan cautivadora como usted\u2026 Todos los elementos perfectos para un tiempo
+      ameno y encantador"
+    speaker: 0
+  - text: "Me alegra haberlo conocido, esta fiesta est\xE1 resultando ser m\xE1s
+      interesante de lo que anticipaba"
+    speaker: 0
+  - text: "Qu\xE9dese un momento por favor, quiero saber m\xE1s de usted"
+    speaker: 0
+  playerName: Mr. Raven
+  playerPortrait: {fileID: -1080554493355756316, guid: bee9b9298b436784d8a42f43b431dd5b, type: 3}
+  npcName: Adonis Branwen
+  npcPortrait: {fileID: 1058846573846413082, guid: a8e787f01757c4c4e85a588aa01c6430, type: 3}
+  autoProgressLines: 
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1

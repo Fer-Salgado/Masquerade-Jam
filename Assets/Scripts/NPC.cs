@@ -18,6 +18,13 @@ public class NPC : MonoBehaviour, IInteractable
     public int pauseAt;
     public bool isInMinigame = false;
 
+    public NPC_dialogue wellStageTwo;
+    public NPC_dialogue piperStageTwo;
+    public NPC_dialogue piperStageThree;
+    public NPC_dialogue gayStageTwo;
+    public NPC_dialogue gayStageThree;
+
+
 
     public bool CanInteract()
     {
@@ -42,6 +49,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         isDialogueActive = true;
         //dialogueIndex = 0;
+
 
         nameText.text = dialogueData.npcName;
         portraitImage.sprite = dialogueData.npcPortrait;

@@ -2726,7 +2726,7 @@ GameObject:
   - component: {fileID: 1363858012}
   m_Layer: 0
   m_Name: NPC_Wellington
-  m_TagString: Untagged
+  m_TagString: Noseay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2867,6 +2867,11 @@ MonoBehaviour:
   lineasDichas: 0
   pauseAt: 15
   isInMinigame: 0
+  wellStageTwo: {fileID: 11400000, guid: 2e1b72a1b95a77b4ca490cb7a1e11c71, type: 2}
+  piperStageTwo: {fileID: 0}
+  piperStageThree: {fileID: 0}
+  gayStageTwo: {fileID: 0}
+  gayStageThree: {fileID: 0}
 --- !u!1 &1452200600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,7 +3186,7 @@ GameObject:
   - component: {fileID: 1682225131}
   m_Layer: 0
   m_Name: NPC_Adonis
-  m_TagString: Untagged
+  m_TagString: Gay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3276,6 +3281,11 @@ MonoBehaviour:
   lineasDichas: 0
   pauseAt: 15
   isInMinigame: 0
+  wellStageTwo: {fileID: 0}
+  piperStageTwo: {fileID: 0}
+  piperStageThree: {fileID: 0}
+  gayStageTwo: {fileID: 11400000, guid: 2b9abc9a77bd5734ebd828f299429142, type: 2}
+  gayStageThree: {fileID: 11400000, guid: 14befb1b05b3f9d4d8b6ce23322625d3, type: 2}
 --- !u!61 &1682225132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3586,7 +3596,7 @@ GameObject:
   - component: {fileID: 1977686392}
   m_Layer: 0
   m_Name: NPC_Piper
-  m_TagString: Untagged
+  m_TagString: Pie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3681,6 +3691,11 @@ MonoBehaviour:
   lineasDichas: 0
   pauseAt: 15
   isInMinigame: 0
+  wellStageTwo: {fileID: 0}
+  piperStageTwo: {fileID: 11400000, guid: e9413c74a149c044e84aefd5651b16cf, type: 2}
+  piperStageThree: {fileID: 11400000, guid: f12b11a1dc6cf814994134e9eba9ced3, type: 2}
+  gayStageTwo: {fileID: 0}
+  gayStageThree: {fileID: 0}
 --- !u!61 &1977686393
 BoxCollider2D:
   m_ObjectHideFlags: 0
