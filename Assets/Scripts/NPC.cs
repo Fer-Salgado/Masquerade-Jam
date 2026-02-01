@@ -1,138 +1,129 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;   
+    using System.Collections;
+    using System.Collections.Generic;
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.UI;   
 
-public class NPC : MonoBehaviour, IInteractable
-{
-    public NPC_dialogue dialogueData;
-    public GameObject dialoguePanel;
-    public TMP_Text dialogueText, nameText;
-    public Image portraitImage;
-
-    private int dialogueIndex = 0;
-    private bool isTyping, isDialogueActive;
-
-    public int lineasDichas = 0;
-    public int pauseAt;
-    public bool isInMinigame = false;
-
-
-    public bool CanInteract()
+    public class NPC : MonoBehaviour, IInteractable
     {
-        return !isDialogueActive;
-    }
+        public NPC_dialogue dialogueData;
+        public GameObject dialoguePanel;
+        public TMP_Text dialogueText, nameText;
+        public Image portraitImage;
+
+        private int dialogueIndex = 0;
+        private bool isTyping, isDialogueActive;
+
+        public int lineasDichas = 0;
+        public int pauseAt;
+
+
+        public bool CanInteract()
+        {
+            return !isDialogueActive;
+        }
     
-    public void Interact()
-    {
-        if (dialogueData == null || (PauseController.isGamePaused && !isDialogueActive))
-            return;
-        if (isDialogueActive)
+        public void Interact()
         {
-            NextLine();
-        }
-        else
-        {
-            StartDialogue();
-        }
-    }
-
-    void StartDialogue()
-    {
-        isDialogueActive = true;
-        //dialogueIndex = 0;
-
-        nameText.text = dialogueData.npcName;
-        portraitImage.sprite = dialogueData.npcPortrait;
-
-        dialoguePanel.SetActive(true);
-        PauseController.SetPause(true);
-
-        StartCoroutine(Typeline());
-    }
-
-    void NextLine()
-    {
-
-        if (isInMinigame) return;
-
-        if (isTyping)
-        {
-            StopAllCoroutines();
-            dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
-            isTyping = false;
-            return;
+            if (dialogueData == null || (PauseController.isGamePaused && !isDialogueActive))
+                return;
+            if (isDialogueActive)
+            {
+                NextLine();
+            }
+            else
+            {
+                StartDialogue();
+            }
         }
 
-        if(lineasDichas == pauseAt)
+        void StartDialogue()
         {
-            StartCoroutine(MiniGame());
-            return;
-        }
+            isDialogueActive = true;
+            //dialogueIndex = 0;
 
-    
+            nameText.text = dialogueData.npcName;
+            portraitImage.sprite = dialogueData.npcPortrait;
 
-        if(++dialogueIndex < dialogueData.dialogueLines.Length)
-        { 
+            dialoguePanel.SetActive(true);
+            PauseController.SetPause(true);
+
             StartCoroutine(Typeline());
         }
 
-        else
+        void NextLine()
         {
-            EndDialogue();
+            if (isTyping)
+            {
+                StopAllCoroutines();
+                dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
+                isTyping = false;
+            }
+            else if(++dialogueIndex < dialogueData.dialogueLines.Length)
+            { 
+                StartCoroutine(Typeline());
+            }
+           //else if(lineasDichas == pauseAt)
+            //{
+                //EndDialogue();
+                //StopAllCoroutines();
+                //MiniGame();
+            //}
+            else
+            {
+                EndDialogue();
+            }
         }
-    }
 
 
-    IEnumerator Typeline()
-    {
-        isTyping = true;
-        dialogueText.SetText("");   
-
-        foreach(char letter in dialogueData.dialogueLines[dialogueIndex])
+        IEnumerator Typeline()
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(dialogueData.typingSpeed);
+            isTyping = true;
+            dialogueText.SetText("");   
+
+            foreach(char letter in dialogueData.dialogueLines[dialogueIndex])
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(dialogueData.typingSpeed);
+            }
+
+            isTyping = false;
+
+            if(dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
+            { 
+                yield return new WaitForSeconds(dialogueData.autoProgressDelay);
+                NextLine();
+            }
+            ++lineasDichas;
         }
 
-        isTyping = false;
+        public void EndDialogue()
+        {
+            StopAllCoroutines();
+            isDialogueActive = false;
+            dialogueText.SetText("");
+            dialoguePanel.SetActive(false);
+            PauseController.SetPause(false);
 
-        if(dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
-        { 
-            yield return new WaitForSeconds(dialogueData.autoProgressDelay);
-            NextLine();
         }
-        ++lineasDichas;
+
+        IEnumerator MiniGame()
+        {
+            if (lineasDichas == pauseAt)
+            {
+                //EndDialogue();
+                StopAllCoroutines();
+                yield return new WaitForSeconds(5f);
+                print("imagina que hay un mini juego, q haces");
+                print("ya acabo gracias");
+                dialogueIndex = ++pauseAt;
+                StartDialogue();
+
+            }
+        }
+
+        void Update()
+        {
+            MiniGame();
+        }
     }
-
-    public void EndDialogue()
-    {
-        StopAllCoroutines();
-        isDialogueActive = false;
-        dialogueText.SetText("");
-        dialoguePanel.SetActive(false);
-        PauseController.SetPause(false);
-
-    }
-
-    IEnumerator MiniGame()
-    {
-        if (isInMinigame) yield break;
-        isInMinigame = true;
-        isDialogueActive = true;
-        dialoguePanel.SetActive(false);
-        PauseController.SetPause(false);
-        Debug.Log("Inicia el minijuego");
-        yield return new WaitForSeconds(5f);
-        Debug.Log("Termina el minijuego");
-
-        isInMinigame = false;
-        PauseController.SetPause(true);
-        dialoguePanel.SetActive(true);
-
-        StartCoroutine(Typeline());
-
-
-    }
-}
