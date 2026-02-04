@@ -24,7 +24,6 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        // Si asignaste un clip en el inspector, lo reproducimos de inmediato
         if (backgroundMusic != null)
         {
             PlayBackgroundMusic(true, backgroundMusic);
@@ -33,18 +32,34 @@ public class MusicManager : MonoBehaviour
 
     public void PlayBackgroundMusic(bool resetSong, AudioClip audioClip = null)
     {
+        if (audioSource == null)
+        {
+            Debug.LogError("¡Falta el AudioSource en el MusicManager!");
+            return;
+        }
+
+        // Si pasamos un clip nuevo
         if (audioClip != null)
         {
+            // Evitamos reiniciar la canción si ya es la que está sonando
+            if (audioSource.clip == audioClip && audioSource.isPlaying && !resetSong)
+            {
+                return;
+            }
+
+            Debug.Log("Reproduciendo: " + audioClip.name);
             audioSource.clip = audioClip;
-            audioSource.Play(); // <--- Corregido: Ahora sí le da Play al asignar el clip
+            audioSource.Play();
         }
+        // Si no pasamos clip, pero ya hay uno cargado en el AudioSource
         else if (audioSource.clip != null)
         {
-            if (resetSong)
-            {
-                audioSource.Stop();
-            }
+            if (resetSong) audioSource.Stop();
             audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Se intentó tocar música pero no hay Clip asignado.");
         }
     }
 }
