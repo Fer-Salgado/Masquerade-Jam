@@ -37,7 +37,7 @@ MonoBehaviour:
       que tenga tal afinidad a lo refinado"
     speaker: 0
   playerName: Mr. Raven
-  playerPortrait: {fileID: -1080554493355756316, guid: bee9b9298b436784d8a42f43b431dd5b, type: 3}
+  playerPortrait: {fileID: 6198415992585661286, guid: b5b98121e599db347b8795d3585ed3b1, type: 3}
   npcName: "Se\xF1ora Wellington"
   npcPortrait: {fileID: -227048364753191679, guid: f9990f4602484d54fa86c280193788e7, type: 3}
   autoProgressLines: 0101010101010101010101

@@ -51,8 +51,8 @@ public class NPC : MonoBehaviour, IInteractable
         //dialogueIndex = 0;
 
 
-        nameText.text = dialogueData.npcName;
-        portraitImage.sprite = dialogueData.npcPortrait;
+        //nameText.text = dialogueData.npcName;
+        //portraitImage.sprite = dialogueData.npcPortrait;
 
         dialoguePanel.SetActive(true);
         PauseController.SetPause(true);
@@ -98,6 +98,19 @@ public class NPC : MonoBehaviour, IInteractable
     {
         isTyping = true;
         dialogueText.SetText("");
+
+        DialogueLine line = dialogueData.dialogueLines[dialogueIndex];
+        if (line.speaker == Speaker.NPC)
+        {
+            nameText.text = dialogueData.npcName;
+            portraitImage.sprite = dialogueData.npcPortrait;
+        }
+
+        else
+        {
+            nameText.text = dialogueData.playerName;
+            portraitImage.sprite = dialogueData.playerPortrait;
+        }
 
         foreach (char letter in dialogueData.dialogueLines[dialogueIndex].text)
         {
