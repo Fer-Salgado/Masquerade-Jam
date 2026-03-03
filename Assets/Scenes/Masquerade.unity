@@ -1255,6 +1255,53 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.12734282, y: 3.1914685}
   m_EdgeRadius: 0
+--- !u!1 &297160820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297160821}
+  - component: {fileID: 297160822}
+  m_Layer: 0
+  m_Name: ItemDictionary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &297160821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297160820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 505624969}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &297160822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297160820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604e8007af610714eb1391b76a18c7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - {fileID: 5844820390423360425, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+  - {fileID: 8356060462808103879, guid: 01c7501bacc2a294abf723d5adff296f, type: 3}
 --- !u!1 &344032704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,7 +2244,8 @@ Transform:
   m_LocalPosition: {x: 994.5958, y: 668.8656, z: -5.526451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 297160821}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &505624970
@@ -2215,7 +2263,9 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1615555431}
   slotPrefab: {fileID: 6788542611523001615, guid: bc88d8d70f25b324d85dd9394da06ffc, type: 3}
   slotCount: 24
-  itemPrefabs: []
+  itemPrefabs:
+  - {fileID: 2524832555252788938, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+  - {fileID: 135187490969953956, guid: 01c7501bacc2a294abf723d5adff296f, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,7 +2709,6 @@ Transform:
   m_Children:
   - {fileID: 22137}
   - {fileID: 2103713311}
-  - {fileID: 1201283636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &545391535
@@ -3046,7 +3095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635336967}
   m_Layer: 0
-  m_Name: RO
+  m_Name: ROC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6311,7 +6360,7 @@ RectTransform:
   m_Children:
   - {fileID: 2101740933}
   - {fileID: 401197920}
-  m_Father: {fileID: 545391534}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6699,7 +6748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255805711}
   m_Layer: 0
-  m_Name: RJ
+  m_Name: RJC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7148,7 +7197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354399994}
   m_Layer: 0
-  m_Name: R1
+  m_Name: R1C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9293,7 +9342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825325642}
   m_Layer: 0
-  m_Name: RK
+  m_Name: RKC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9501,7 +9550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925787235}
   m_Layer: 0
-  m_Name: RK (1)
+  m_Name: RBC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10857,6 +10906,7 @@ SceneRoots:
   - {fileID: 1580278664}
   - {fileID: 1227308850}
   - {fileID: 619394802}
+  - {fileID: 1201283636}
   - {fileID: 545391534}
   - {fileID: 1363858010}
   - {fileID: 758123232}
