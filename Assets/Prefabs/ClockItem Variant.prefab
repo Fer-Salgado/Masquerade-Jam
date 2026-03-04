@@ -8,9 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1390455386884273200, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 75a935d6f390e7c46852bcdc8627f54b, type: 3}
+    - target: {fileID: 1390455386884273200, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2524832555252788938, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
       propertyPath: m_Name
       value: ClockItem Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659191306374236234, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c793cc0c6745dcb4b847958df56579ad, type: 3}
+    - target: {fileID: 2659191306374236234, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6724683801321149798, guid: 662cacdc99190e14b86a09e344b14926, type: 3}
       propertyPath: m_Pivot.x
