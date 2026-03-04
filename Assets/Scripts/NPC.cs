@@ -11,6 +11,11 @@ public class NPC : MonoBehaviour, IInteractable
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
+    [Header("Sistema de Amistad")]
+    public int friendshipLevel = 0;
+    public Sprite[] friendshipSprites;
+    public Image friendshipIndicatorUI;
+
     private int dialogueIndex = 0;
     private bool isTyping, isDialogueActive;
 
@@ -24,8 +29,6 @@ public class NPC : MonoBehaviour, IInteractable
     public NPC_dialogue gayStageTwo;
     public NPC_dialogue gayStageThree;
 
-
-
     public bool CanInteract()
     {
         return !isDialogueActive;
@@ -35,12 +38,14 @@ public class NPC : MonoBehaviour, IInteractable
     {
         if (dialogueData == null || (PauseController.isGamePaused && !isDialogueActive))
             return;
+
         if (isDialogueActive)
         {
             NextLine();
         }
         else
         {
+            UpdateFriendshipUI();
             StartDialogue();
         }
     }
@@ -48,27 +53,26 @@ public class NPC : MonoBehaviour, IInteractable
     void StartDialogue()
     {
         isDialogueActive = true;
-        //dialogueIndex = 0;
-
-
-        //nameText.text = dialogueData.npcName;
-        //portraitImage.sprite = dialogueData.npcPortrait;
-
         dialoguePanel.SetActive(true);
         PauseController.SetPause(true);
-
         StartCoroutine(Typeline());
+    }
+
+    void UpdateFriendshipUI()
+    {
+        if (friendshipIndicatorUI == null || friendshipSprites.Length < 4) return;
+
+        friendshipIndicatorUI.gameObject.SetActive(true);
+        friendshipIndicatorUI.sprite = friendshipSprites[friendshipLevel];
     }
 
     void NextLine()
     {
-
         if (isInMinigame) return;
 
         if (isTyping)
         {
             StopAllCoroutines();
-            //dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
             dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex].text);
             isTyping = false;
             return;
@@ -80,19 +84,15 @@ public class NPC : MonoBehaviour, IInteractable
             return;
         }
 
-
-
         if (++dialogueIndex < dialogueData.dialogueLines.Length)
         {
             StartCoroutine(Typeline());
         }
-
         else
         {
             EndDialogue();
         }
     }
-
 
     IEnumerator Typeline()
     {
@@ -105,7 +105,6 @@ public class NPC : MonoBehaviour, IInteractable
             nameText.text = dialogueData.npcName;
             portraitImage.sprite = dialogueData.npcPortrait;
         }
-
         else
         {
             nameText.text = dialogueData.playerName;
@@ -136,6 +135,13 @@ public class NPC : MonoBehaviour, IInteractable
         dialoguePanel.SetActive(false);
         PauseController.SetPause(false);
 
+        if (friendshipIndicatorUI != null)
+            friendshipIndicatorUI.gameObject.SetActive(false);
+
+        if (friendshipLevel < 3)
+        {
+            friendshipLevel++;
+        }
     }
 
     IEnumerator MiniGame()
@@ -145,17 +151,10 @@ public class NPC : MonoBehaviour, IInteractable
         isDialogueActive = true;
         dialoguePanel.SetActive(false);
         PauseController.SetPause(false);
-        Debug.Log("Inicia el minijuego");
         yield return new WaitForSeconds(5f);
-        Debug.Log("Termina el minijuego");
-
         isInMinigame = false;
         PauseController.SetPause(true);
         dialoguePanel.SetActive(true);
-
         StartCoroutine(Typeline());
-
-
     }
-
 }
