@@ -16,8 +16,9 @@ public class QuestStage
 
 public class NPC : MonoBehaviour, IInteractable
 {
-    [Header("NPC Normal (Sin Misiones)")]
-    public NPC_dialogue defaultDialogue;
+    [Header("NPC Normal (Ciclo Infinito)")]
+    public List<NPC_dialogue> randomDialogues;
+    private int currentRandomIndex = 0;
 
     [Header("Progreso del NPC (Con Misiones)")]
     public int friendshipLevel = 0;
@@ -61,17 +62,21 @@ public class NPC : MonoBehaviour, IInteractable
 
     private void CheckDialogueState()
     {
-        // 1. Si no hay misiones configuradas
+        // 1. LÓGICA PARA NPCs SIN MISIONES (INFINITOS)
         if (quests == null || quests.Count == 0)
         {
-            currentDialoguePlaying = defaultDialogue;
+            if (randomDialogues != null && randomDialogues.Count > 0)
+            {
+                currentDialoguePlaying = randomDialogues[currentRandomIndex];
+                currentRandomIndex = (currentRandomIndex + 1) % randomDialogues.Count;
+            }
             return;
         }
 
-        // 2. Primera interacción: Se presenta antes de pedir nada
-        if (!hasIntroducedSelf && defaultDialogue != null)
+        // 2. Primera interacción para NPCs con misiones (usa el primer diálogo aleatorio como intro)
+        if (!hasIntroducedSelf && randomDialogues != null && randomDialogues.Count > 0)
         {
-            currentDialoguePlaying = defaultDialogue;
+            currentDialoguePlaying = randomDialogues[0];
             hasIntroducedSelf = true;
             return;
         }
@@ -96,7 +101,6 @@ public class NPC : MonoBehaviour, IInteractable
             if (inventory != null && inventory.HasItem(currentQuest.requiredItemID))
             {
                 currentDialoguePlaying = currentQuest.completeDialogue;
-
                 inventory.RemoveItem(currentQuest.requiredItemID);
                 friendshipLevel++;
                 hasStartedCurrentQuest = false;
@@ -116,7 +120,6 @@ public class NPC : MonoBehaviour, IInteractable
         PauseController.SetPause(true);
 
         UpdateFriendshipDisplay();
-
         StartCoroutine(Typeline());
     }
 
@@ -124,7 +127,6 @@ public class NPC : MonoBehaviour, IInteractable
     {
         if (isTyping)
         {
-            // Salto rápido de texto
             StopAllCoroutines();
             dialogueText.SetText(currentDialoguePlaying.dialogueLines[dialogueIndex].text);
             isTyping = false;
@@ -167,10 +169,27 @@ public class NPC : MonoBehaviour, IInteractable
 
     private void UpdateFriendshipDisplay()
     {
-        if (friendshipUI != null && friendshipSprites != null && friendshipSprites.Length > 0)
+        // Si no hay objeto de UI asignado, no hacemos nada
+        if (friendshipUI == null) return;
+
+        // Si el NPC no tiene misiones, ocultamos el medidor
+        if (quests == null || quests.Count == 0)
+        {
+            friendshipUI.gameObject.SetActive(false);
+            return;
+        }
+
+        // Si tiene misiones, nos aseguramos de que sea visible
+        friendshipUI.gameObject.SetActive(true);
+
+        // Actualizamos el sprite según el nivel de amistad
+        if (friendshipSprites != null && friendshipSprites.Length > 0)
         {
             int spriteIndex = Mathf.Clamp(friendshipLevel, 0, friendshipSprites.Length - 1);
             friendshipUI.sprite = friendshipSprites[spriteIndex];
+
+            // Mantiene las proporciones correctas de tus imágenes
+            friendshipUI.SetNativeSize();
         }
     }
 }
