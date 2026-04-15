@@ -4,158 +4,173 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class QuestStage
+{
+    public string questName;
+    public int requiredItemID;
+    public NPC_dialogue introDialogue;
+    public NPC_dialogue waitingDialogue;
+    public NPC_dialogue completeDialogue;
+}
+
 public class NPC : MonoBehaviour, IInteractable
 {
-    public NPC_dialogue dialogueData;
+    [Header("NPC Normal (Sin Misiones)")]
+    public NPC_dialogue defaultDialogue;
+
+    [Header("Progreso del NPC (Con Misiones)")]
+    public int friendshipLevel = 0;
+    public List<QuestStage> quests;
+
+    [Header("UI y Componentes")]
     public GameObject dialoguePanel;
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
+    [Header("UI de Amistad")]
+    public Image friendshipUI;
+    public Sprite[] friendshipSprites;
+
     private int dialogueIndex = 0;
     private bool isTyping, isDialogueActive;
+    private bool hasIntroducedSelf = false;
+    private bool hasStartedCurrentQuest = false;
+    private NPC_dialogue currentDialoguePlaying;
+    private InventoryController inventory;
 
-    public int lineasDichas = 0;
-    public int pauseAt;
-    public bool isInMinigame = false;
-
-    public NPC_dialogue wellStageTwo;
-    public NPC_dialogue piperStageTwo;
-    public NPC_dialogue piperStageThree;
-    public NPC_dialogue gayStageTwo;
-    public NPC_dialogue gayStageThree;
-
-
-
-    public bool CanInteract()
+    void Start()
     {
-        return !isDialogueActive;
+        inventory = FindObjectOfType<InventoryController>();
     }
+
+    public bool CanInteract() => !isDialogueActive;
 
     public void Interact()
     {
-        if (dialogueData == null || (PauseController.isGamePaused && !isDialogueActive))
-            return;
-        if (isDialogueActive)
+        if (isDialogueActive) { NextLine(); return; }
+        if (PauseController.isGamePaused) return;
+
+        CheckDialogueState();
+
+        if (currentDialoguePlaying != null)
         {
-            NextLine();
+            StartDialogue();
+        }
+    }
+
+    private void CheckDialogueState()
+    {
+        // 1. Si no hay misiones configuradas
+        if (quests == null || quests.Count == 0)
+        {
+            currentDialoguePlaying = defaultDialogue;
+            return;
+        }
+
+        // 2. Primera interacción: Se presenta antes de pedir nada
+        if (!hasIntroducedSelf && defaultDialogue != null)
+        {
+            currentDialoguePlaying = defaultDialogue;
+            hasIntroducedSelf = true;
+            return;
+        }
+
+        // 3. Si ya completó todas las misiones
+        if (friendshipLevel >= quests.Count)
+        {
+            currentDialoguePlaying = quests[quests.Count - 1].completeDialogue;
+            return;
+        }
+
+        // 4. Ciclo de misiones
+        QuestStage currentQuest = quests[friendshipLevel];
+
+        if (!hasStartedCurrentQuest)
+        {
+            currentDialoguePlaying = currentQuest.introDialogue;
+            hasStartedCurrentQuest = true;
         }
         else
         {
-            StartDialogue();
+            if (inventory != null && inventory.HasItem(currentQuest.requiredItemID))
+            {
+                currentDialoguePlaying = currentQuest.completeDialogue;
+
+                inventory.RemoveItem(currentQuest.requiredItemID);
+                friendshipLevel++;
+                hasStartedCurrentQuest = false;
+            }
+            else
+            {
+                currentDialoguePlaying = currentQuest.waitingDialogue;
+            }
         }
     }
 
     void StartDialogue()
     {
         isDialogueActive = true;
-        //dialogueIndex = 0;
-
-
-        //nameText.text = dialogueData.npcName;
-        //portraitImage.sprite = dialogueData.npcPortrait;
-
+        dialogueIndex = 0;
         dialoguePanel.SetActive(true);
         PauseController.SetPause(true);
+
+        UpdateFriendshipDisplay();
 
         StartCoroutine(Typeline());
     }
 
     void NextLine()
     {
-
-        if (isInMinigame) return;
-
         if (isTyping)
         {
+            // Salto rápido de texto
             StopAllCoroutines();
-            //dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
-            dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex].text);
+            dialogueText.SetText(currentDialoguePlaying.dialogueLines[dialogueIndex].text);
             isTyping = false;
             return;
         }
 
-        if (lineasDichas == pauseAt)
-        {
-            StartCoroutine(MiniGame());
-            return;
-        }
-
-
-
-        if (++dialogueIndex < dialogueData.dialogueLines.Length)
+        if (++dialogueIndex < currentDialoguePlaying.dialogueLines.Length)
         {
             StartCoroutine(Typeline());
         }
-
         else
         {
             EndDialogue();
         }
     }
 
-
     IEnumerator Typeline()
     {
         isTyping = true;
         dialogueText.SetText("");
+        DialogueLine line = currentDialoguePlaying.dialogueLines[dialogueIndex];
 
-        DialogueLine line = dialogueData.dialogueLines[dialogueIndex];
-        if (line.speaker == Speaker.NPC)
-        {
-            nameText.text = dialogueData.npcName;
-            portraitImage.sprite = dialogueData.npcPortrait;
-        }
+        nameText.text = (line.speaker == Speaker.NPC) ? currentDialoguePlaying.npcName : currentDialoguePlaying.playerName;
+        portraitImage.sprite = (line.speaker == Speaker.NPC) ? currentDialoguePlaying.npcPortrait : currentDialoguePlaying.playerPortrait;
 
-        else
-        {
-            nameText.text = dialogueData.playerName;
-            portraitImage.sprite = dialogueData.playerPortrait;
-        }
-
-        foreach (char letter in dialogueData.dialogueLines[dialogueIndex].text)
+        foreach (char letter in line.text)
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(dialogueData.typingSpeed);
+            yield return new WaitForSeconds(currentDialoguePlaying.typingSpeed);
         }
-
         isTyping = false;
-
-        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
-        {
-            yield return new WaitForSeconds(dialogueData.autoProgressDelay);
-            NextLine();
-        }
-        ++lineasDichas;
     }
 
     public void EndDialogue()
     {
-        StopAllCoroutines();
         isDialogueActive = false;
-        dialogueText.SetText("");
         dialoguePanel.SetActive(false);
         PauseController.SetPause(false);
-
     }
 
-    IEnumerator MiniGame()
+    private void UpdateFriendshipDisplay()
     {
-        if (isInMinigame) yield break;
-        isInMinigame = true;
-        isDialogueActive = true;
-        dialoguePanel.SetActive(false);
-        PauseController.SetPause(false);
-        Debug.Log("Inicia el minijuego");
-        yield return new WaitForSeconds(5f);
-        Debug.Log("Termina el minijuego");
-
-        isInMinigame = false;
-        PauseController.SetPause(true);
-        dialoguePanel.SetActive(true);
-
-        StartCoroutine(Typeline());
-
-
+        if (friendshipUI != null && friendshipSprites != null && friendshipSprites.Length > 0)
+        {
+            int spriteIndex = Mathf.Clamp(friendshipLevel, 0, friendshipSprites.Length - 1);
+            friendshipUI.sprite = friendshipSprites[spriteIndex];
+        }
     }
-
 }

@@ -74,4 +74,37 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
+
+    
+    public bool HasItem(int itemID)
+    {
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot.currentItem != null)
+            {
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item.ID == itemID) return true;
+            }
+        }
+        return false;
+    }
+
+    public void RemoveItem(int itemID)
+    {
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot.currentItem != null)
+            {
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item.ID == itemID)
+                {
+                    Destroy(slot.currentItem);
+                    slot.currentItem = null;
+                    return; 
+                }
+            }
+        }
+    }
 }

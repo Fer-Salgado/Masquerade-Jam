@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e3bd8935ce260c4bb2d4e733dafc762
+guid: 6be50e8f54acc604497cf37519ca8f96
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7574820544245468611
-    second: wineSprite_0
+      213: 9046055064293927492
+    second: progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wineSprite_0
+      name: progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 7
-        width: 8
-        height: 20
+        x: 0
+        y: 263
+        width: 350
+        height: 87
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d32faee19d4d0e690800000000000000
-      internalID: -7574820544245468611
+      spriteID: 44aecd5272b0a8d70800000000000000
+      internalID: 9046055064293927492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 350
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0433936af158f4448e2d88e07a76815
+      internalID: -508062179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 89
+        width: 350
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d436fd11994184f4588dda23a81c3a8c
+      internalID: -1077571781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 350
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecfe8c4ca92ca2b45a3aa9638b1dc916
+      internalID: 1470935485
       vertices: []
       indices: 
       edges: []
@@ -125,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ed8b6e9aed6986642b334030fd487e06
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +201,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wineSprite_0: -7574820544245468611
+      progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_0: 9046055064293927492
+      progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_1: -508062179
+      progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_2: -1077571781
+      progress-level-indicator-bars-showing-0-50-75-and-100-percent-completion-status-vector_3: 1470935485
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

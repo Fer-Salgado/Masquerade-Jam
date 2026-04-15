@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
-  m_Name: WSTDialogue
+  m_Name: WineHold
   m_EditorClassIdentifier: 
-  dialogueLines: []
-  playerName: 
-  playerPortrait: {fileID: 0}
-  npcName: 
-  npcPortrait: {fileID: 0}
-  autoProgressLines: 
+  dialogueLines:
+  - text: tengo sed, y mi vino?
+    speaker: 0
+  playerName: mr raven
+  playerPortrait: {fileID: 6198415992585661286, guid: b5b98121e599db347b8795d3585ed3b1, type: 3}
+  npcName: "se\xF1ora weliilngton"
+  npcPortrait: {fileID: -227048364753191679, guid: f9990f4602484d54fa86c280193788e7, type: 3}
+  autoProgressLines: 00
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}

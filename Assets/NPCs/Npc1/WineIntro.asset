@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6f77ef455487468bb1252ee2d95e9, type: 3}
+  m_Name: WineIntro
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - text: quiero un vinito
+    speaker: 0
+  playerName: mr raven
+  playerPortrait: {fileID: 6198415992585661286, guid: b5b98121e599db347b8795d3585ed3b1, type: 3}
+  npcName: "se\xF1ora wellington"
+  npcPortrait: {fileID: -227048364753191679, guid: f9990f4602484d54fa86c280193788e7, type: 3}
+  autoProgressLines: 00
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
