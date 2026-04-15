@@ -51,7 +51,7 @@ MonoBehaviour:
   playerPortrait: {fileID: -1080554493355756316, guid: bee9b9298b436784d8a42f43b431dd5b, type: 3}
   npcName: Shepherd Piper
   npcPortrait: {fileID: 56156260904319957, guid: 05d9ac239a9383741b57ccc48605ad4d, type: 3}
-  autoProgressLines: 01010101010101010101010101
+  autoProgressLines: 01010101010101010101010100
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
